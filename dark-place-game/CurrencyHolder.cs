@@ -9,6 +9,8 @@ namespace dark_place_game
 
     public class CantWithDrawMoreThanCurrentAmountExeption : Exception{}
 
+    public class CantStoreMoreThanCurrentAmountExeption : Exception{}
+
     public class CurrencyHolder
     {
         public static readonly string CURRENCY_DEFAULT_NAME = "Unnamed";
@@ -44,7 +46,10 @@ namespace dark_place_game
         private int capacity = 0;
 
         public CurrencyHolder(string name,int capacity, int amount){
-            if(amount < 0 || name == null || name == "" || name.Length < 4){
+            if(amount < 0 || name == null || name == "" || name.Length < 4 || name.Length > 10 || capacity < 1){
+                throw new System.ArgumentException("Argument invalide");
+            }
+            if(name[0]=='a' || name[0]=='A'){
                 throw new System.ArgumentException("Argument invalide");
             }
             Capacity = capacity;
@@ -52,26 +57,41 @@ namespace dark_place_game
             CurrentAmount = amount;
         }
 
-        public bool IsEmpty() {
-            return true;
+        public bool IsFull() {
+            if(this.CurrentAmount == this.Capacity){
+                return true;
+            }
+            return false;
+            
         }
 
-        public bool IsFull() {
-            return true;
+        public bool IsEmpty() {
+            if (this.CurrentAmount == 0){
+                return true;
+            }
+            return false;
         }
 
         public void Store(int amount) {
             var amountCurrent = this.CurrentAmount + amount;
-            if(amountCurrent > this.Capacity){
-                throw new System.ArgumentException("Argument invalide");
+            if(amount < 0) {
+                throw new CantStoreMoreThanCurrentAmountExeption();
             }
-            this.CurrentAmount += amount;
+            if(amountCurrent > this.Capacity || amount == 0){
+                throw new System.ArgumentException("Argument invalide");
+            }else {
+                this.CurrentAmount += amount;
+            }
+            
         }
 
         public void Withdraw(int amount) {
             var amountCurrent = this.CurrentAmount - amount;
             if(amount < 0){
                 throw new CantWithDrawMoreThanCurrentAmountExeption();
+            }
+            if(amount == 0) {
+                throw new System.ArgumentException("Argument invalide");
             }
             this.CurrentAmount -= amount;
         }
