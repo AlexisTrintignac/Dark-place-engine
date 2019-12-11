@@ -14,7 +14,7 @@ namespace dark_place_game.tests
         [Fact]
         public void VraiShouldBeTrue()
         {
-            var vrai = false;
+            var vrai = true;
             Assert.True(vrai, "Erreur, vrai vaut false. Le test est volontairement mal écrit, corrigez le.");
         }
 
@@ -69,7 +69,7 @@ namespace dark_place_game.tests
             Assert.Throws<ArgumentException>(mauvaisAppel);
         }
 
-        /** #TODO_ETAPE_4
+        #TODO_ETAPE_4
         [Fact]
         public void BrouzoufIsAValidCurrencyName ()
         {
@@ -106,7 +106,7 @@ namespace dark_place_game.tests
             // A vous d'écrire un test qui vérifie que retirer (methode withdraw) une quantité negative de currency leve une exeption CantWithDrawNegativeCurrencyAmountExeption.
             // Asruce : dans ce cas prévu avant même de pouvoir compiler le test, vous allez être obligé de créer la classe CantWithDrawMoreThanCurrentAmountExeption (vous pouvez la mettre dans le meme fichier que CurrencyHolder)
         }
-        #TODO_ETAPE_4 */
+        #TODO_ETAPE_4
 
     }
 }
