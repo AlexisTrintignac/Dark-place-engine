@@ -164,20 +164,25 @@ namespace dark_place_game.tests
         }
 
         [Fact]
-        public void CantStoreAndWithdraw0CurrencyThrowExeption()
+        public void CantStore0CurrencyThrowExeption()
         {
-            Action mauvaisAppel1 = () =>
+            Action mauvaisAppel = () =>
             {
                 var ch = new CurrencyHolder(EXEMPLE_NOM_MONNAIE_VALIDE, 700, 490);
                 ch.Store(0);
             };
-            Assert.Throws<ArgumentException>(mauvaisAppel1);
-            Action mauvaisAppel2 = () =>
+            Assert.Throws<ArgumentException>(mauvaisAppel);
+        }
+
+        [Fact]
+        public void CantWithdraw0CurrencyThrowExeption()
+        {
+            Action mauvaisAppel = () =>
             {
                 var ch = new CurrencyHolder(EXEMPLE_NOM_MONNAIE_VALIDE, 700, 490);
                 ch.Withdraw(0);
             };
-            Assert.Throws<ArgumentException>(mauvaisAppel2);
+            Assert.Throws<ArgumentException>(mauvaisAppel);
         }
 
         [Fact]
